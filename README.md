@@ -19,6 +19,17 @@ Valeria Rojas Vazquez
 
 ***
 ## Material
+
+1 - Arduino Mega
+1 - Fuente de poder
+1 - Brazo Mecánico Steren K-680
+3 - Puentes H-L298N
+1 - Pantalla LCD 16x2
+2 - Leds
+1 - Buzzer
+1 - Pulsador
+    Cables M-M, H-M 
+
 ***
 ## Archivos 
 
