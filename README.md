@@ -13,7 +13,7 @@ Manuel Alejandro Torres Fonseca
 
 Diana Priscila De la Rosa Campos
 
-Valeria Rojas Vazquez
+Valentina Rojas Vazquez
 ***
 ## Descripcion
 
