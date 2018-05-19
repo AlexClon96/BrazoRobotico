@@ -16,20 +16,33 @@ Diana Priscila De la Rosa Campos
 Valentina Rojas Vazquez
 ***
 ## Descripcion
+Control de un brazo robotico con 5 grados de libertad con arduino y una interfaz grafica en java.
+
+
+
 
 ***
 ## Material
 ***
-Brazo Robotico de la marca Steren K-680 con 5 grados de libertad(base, codo, hombro, muñeca y pinza).
-Arduino Mega 2560
-Display LCD 16x2
-Push button.
-Cables.
-Bocina.
-3 Puente H  L298N
-Protoboard.
-Laptop.
-Fuente de poder.
+1.- Brazo Robotico de la marca Steren K-680 con 5 grados de libertad(base, codo, hombro, muñeca y pinza).
+
+2.- Arduino Mega 2560
+
+3.- Display LCD 16x2
+
+4.- Push button.
+
+5.- Cables.
+
+6.- Bocina.
+
+7.- 3 Puente H  L298N
+
+8.- Protoboard.
+
+9.- Laptop.
+
+10.- Fuente de poder.
 
 
 ## Archivos 
