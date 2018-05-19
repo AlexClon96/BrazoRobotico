@@ -42,5 +42,8 @@ Fuente de poder.
  nombre: Manuel Alejandro Torres Fonseca
  
  correo electronico:321ctorres@gmail.com
+
+nombre: Valentina Rojas Vázquez.
+correo electronico: vale040413@hotmail.com
  
  
