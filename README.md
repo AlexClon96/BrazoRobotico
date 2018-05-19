@@ -20,7 +20,7 @@ Valentina Rojas Vazquez
 ***
 ## Material
 ***
-Brazo Robotico de la marca Steren K-680 con 5 grados de libertad(base, codo, hombro, muñeca y pinza).
+Brazo Robotico de la marca Steren K-680 con 5 grados de libertad(base, codo, hombro, muÃ±eca y pinza).
 Arduino Mega 2560
 Display LCD 16x2
 Push button.
@@ -43,7 +43,8 @@ Fuente de poder.
  
  correo electronico:321ctorres@gmail.com
 
-nombre: Valentina Rojas Vázquez.
+nombre: Valentina Rojas VÃ¡zquez.
+
 correo electronico: vale040413@hotmail.com
  
  
