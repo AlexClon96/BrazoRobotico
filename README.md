@@ -65,7 +65,11 @@ Control de un brazo robotico con 5 grados de libertad con arduino y una interfaz
 ## Contactos
  nombre: Manuel Alejandro Torres Fonseca
  
- correo electronico:321ctorres@gmail.com
+ correo electrónico:321ctorres@gmail.com
+
+ nombre: Diana Priscila De la Rosa Campos
+ 
+ correo electrónico: dian_pris@outlook.com
 
 nombre: Valentina Rojas Vázquez.
 correo electronico: vale040413@hotmail.com
