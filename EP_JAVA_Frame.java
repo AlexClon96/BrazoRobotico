@@ -1,15 +1,16 @@
 /*
--------------------------------------------------------------------------------------------
-Brazo Robotico Automatizado(java)
-------------------------------------------------------------------------------------------
-En este programa se encargara de proporcionar una interface grafica para el
-movimiento del robot en el cual se indicara las partes del robot  y a un lado
-tendra un boton de derecha izquierda, arriba abajo, agarrar soltar dependiendo
-de que parte sea. En caso de la base tiene otro boton de parar debido a que 
-si se preciona una direccion girara a esa direccion hasta que se precione el 
-boton de detener y los otros tienen un movimiento pausado, tambien cuenta
-con un boton de guardar que mandara los movimientos realizados a el programa 
-en arduino.
+--------------------------------------------------------------------------------
+Brazo RobÛtico Automatizado(java)
+--------------------------------------------------------------------------------
+Este programa se encargar· de proporcionar una interfaz gr·fica para el
+movimiento del robot, en el cual se indicar·n sus partes y al lado de cada una 
+tendr· un par de botones de "derecha" e "izquierda", "arriba" y "abajo", 
+"agarrar" y "soltar", dependiendo de quÈ parte del brazo sea. En el caso de la 
+base, tiene un botÛn adicional ("detener"), debido a que si se presiona una 
+direcciÛn, girar· continuamente hasta que se presione dicho botÛn. En cambio, 
+los otros botones tienen un movimiento pausado. 
+Adem·s se cuenta con un botÛn de "guardar" el cual mandar· los movimientos 
+realizados manualmente por el usuario al programa en arduino.
 
    Sistemas Programables
    Manuel Alejandro Torres Fonseca
@@ -19,66 +20,68 @@ en arduino.
    18 de Mayo del 2018
 */
 
-//inicia las importaciones
-//importacion para poder identificar los puertos de arduino
+//Inician las importaciones:
+//importaciÛn para poder identificar los puertos de arduino
 import gnu.io.CommPortIdentifier;
-//importacion para poder usar los puertos seriales
+//importaciÛn para poder usar los puertos seriales
 import gnu.io.SerialPort;
-//importacion para poder usar los eventos del puerto serial
+//importaciÛn para poder usar los eventos del puerto serial
 import gnu.io.SerialPortEvent;
-//importacion para poder hacer una accion con lo que recive del puerto serial
+//importaciÛn para poder hacer una acciÛn con lo que recibe del puerto serial
 import gnu.io.SerialPortEventListener;
-//importacion para manejar excepciones
+//importaciÛn para manejar excepciones
 import java.io.IOException;
-//importacion para poder recivir datos  en el momento por el puerto serial 
+//importaciÛn para poder recibir datos en el momento por el puerto serial 
 import java.io.InputStream;
-//importacion para mandar datos en el momento por el puerto serial
+//importaciÛn para mandar datos en el momento por el puerto serial
 import java.io.OutputStream;
-//importacion que es necesaria para usar el puerto serial
+//importaciÛn que es necesaria para usar el puerto serial
 import java.util.Enumeration;
-//importacion para poder recivir varias excepciones a la vez
+//importaciÛn para poder recibir varias excepciones a la vez
 import java.util.TooManyListenersException;
-//importacion necesaria para poder mostrar un error en la excepcion
+//importaciÛn necesaria para poder mostrar un error en la excepciÛn
 import java.util.logging.Level;
-//importacion que ejecuta la excepcion obtenida
+//importaciÛn que ejecuta la excepciÛn obtenida
 import java.util.logging.Logger;
-//importacion para usar una ventana emergente
+//importaciÛn para usar una ventana emergente
 import javax.swing.JOptionPane;
-//terminan las importaciones 
+//Terminan las importaciones 
 
 //clase que reliza la comunicacion serial 
 public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEventListener {
 
-    //inicia declaracion de variables que contendran los movimientos posibles
-    //variable que contiene el movimiento downc
-    private static final String downc = "downc";
+    //Inicia declaracion de variables que contendran los movimientos posibles
+    //para ello se considero que a=base, b=hombro, c=codo, d=muÒeca, e=pinza
+
     //variable que contiene el movimiento derechaa
     private static final String derechaa = "derechaa";
-    //variable que contiene el movimiento stopa
-    private static final String stopa = "stopa";
     //variable que contiene el movimiento izquierdaa
     private static final String izquierdaa = "izquierdaa";
+    //variable que contiene el movimiento stopa
+    private static final String stopa = "stopa";
     //variable que contiene el movimiento upb
     private static final String upb = "upb";    
     //variable que contiene el movimiento downb
     private static final String downb = "downb";
     //variable que contiene el movimiento upc
     private static final String upc = "upc";
-    //variable que contiene el movimiento soltare
-    private static final String soltare = "soltare";
+    //variable que contiene el movimiento downc
+    private static final String downc = "downc";
     //variable que contiene el movimiento upd
     private static final String upd = "upd";
     //variable que contiene el movimiento downd
     private static final String downd = "downd";
     //variable que contiene el movimiento agarrare
     private static final String agarrare = "agarrare";
-    //variable que contiene el movimiento change
+    //variable que contiene el movimiento soltare
+    private static final String soltare = "soltare";
+    //variable que contiene el change (*debiÛ ser save de guardar*)
     private static final String change = "change";
-    //inicia declaracion de variables que contendran los movimientos posibles
+    //Termina declaracion de variables que contendran los movimientos posibles
 
-    //creear varialble de conexion de salida de datos
+    //crear variable de conexion de salida de datos
     private OutputStream output = null;
-    //crear la variable de conexion de entrada para recivir en caso de un error
+    //crear la variable de conexion de entrada para recibir en caso de un error
     private InputStream input = null;
     //crear la variable del puerto serial
     SerialPort serialPort;
@@ -87,24 +90,24 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
     //indicar variable de tiempo necesaria para la conexion con el puerto serial
     private static final int TIMEOUT = 2000;
     //indicar el rando de datos del puerto serial (debe ser igual que arduino)
-    private static final int DATA_RATE = 115200; // Baudios.
+    private static final int DATA_RATE = 115200; // en Baudios.
 
-    //metodo para inicializar los datos
+    //Metodo para inicializar los datos
     public EP_JAVA_Frame() {
-        //llamar metodo de inicializacion de interface grafica
+        //llamar metodo de inicializacion de interfaz grafica
         initComponents();
         //llamar metodo de inicializacion de conexion 
         inicializarConexion();
-     //termina metodo para iniciar los datos
+    //Termina metodo para iniciar los datos
     }
    
-    //inicia metodo de conexion 
+    //Inicia metodo de conexion 
     public void inicializarConexion() {
         //se inicializa el valor del puerto a nulo
         CommPortIdentifier puertoID = null;    
         //se indica el objeto para el numero de puerto 
         Enumeration puertoEnum = CommPortIdentifier.getPortIdentifiers();
-          //inicia ciclo para saber si hay mas elemento en el pueto   
+        //Inicia ciclo para saber si hay mas elemento en el puerto   
         while (puertoEnum.hasMoreElements()) {
             //se declara el objeto para identificar el puerto
             CommPortIdentifier actualPuertoID = (CommPortIdentifier) puertoEnum.nextElement();
@@ -116,7 +119,7 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
                 break;
             //termina la condicional                
             }
-            //termina ciclo para saber si hay mas elemento en el pueto 
+        //Termina ciclo para saber si hay mas elementos en el puerto 
         }
         //condicional si el puerto esta vacio
         if (puertoID == null) {
@@ -124,7 +127,7 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
             mostrarError("No se puede conectar al puerto");
             //se sale de la aplicacion 
             System.exit(ERROR);
-            //termina la condicional de el puerto vacio
+            //termina la condicional del puerto vacio
         }
 
         try {
@@ -134,48 +137,46 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
             serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_2, SerialPort.PARITY_NONE);
             //se le asigna los datos del puerto a la salida 
             output = serialPort.getOutputStream();
-            //excepcion en caso que no funcione la conexion 
+        //excepcion en caso que no funcione la conexion 
         } catch (Exception e) {
             //manda llamar al metodo error con el error
             mostrarError(e.getMessage());
-            //sale de la palicacion
+            //sale de la aplicacion
             System.exit(ERROR);
         }
 
         try {
-            //se le agrega lo que recive de la conexion al serial a la variable input
+            //se le agrega lo que recibe de la conexion al serial a la variable input
             input = serialPort.getInputStream();
-            //en caso que no fucnione maraca el error
+        //en caso que no funcione marca el error
         } catch (IOException ex) {
             //error que marca 
             Logger.getLogger(EP_JAVA_Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
         try {
-            //al puerto selial se le asigna el escucha para recivir los datos 
+            //al puerto serial se le asigna el escucha para recibir los datos 
             serialPort.addEventListener(this);
             //se le indica si los datos estan habilitados
             serialPort.notifyOnDataAvailable(true);
-            //en caso de error m
+        //en caso de error marca el error
         } catch (TooManyListenersException ex) {
             //manda el error que es 
             Logger.getLogger(EP_JAVA_Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
-   //metodo que administra el puerto serial
+   //Metodo que administra el puerto serial
     @Override
     public void serialEvent(SerialPortEvent spe) {
         //condicional si los datos del puerto serial son validos 
         if (spe.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
-            //crear arreglo de bytes por que los datos son recividos por bytes 
+            //crear arreglo de bytes por que los datos son recibidos por bytes 
             byte[] readBuffer = new byte[20];
             try {
                 //crea la variable en la cual no hay bytes
                 int numBytes = 0;
-                //ciclo para recorrer los bytes recividos
+                //ciclo para recorrer los bytes recibidos
                 while (input.available() > 0) {
                     //guarda todos los bytes del serial en la variable numBytes
                     numBytes = input.read(readBuffer);
@@ -188,12 +189,12 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
         }
     }
     
-    //metodo para mandar los datos a arduino
+    //Metodo para mandar los datos a arduino
     private void enviarDatos(String datos) {
         try {
             //obtener los bytes guardados y mandarlos por el puerto serial
             output.write(datos.getBytes());
-            //en caso de error 
+        //en caso de error 
         } catch (Exception e) {
             //llama al metodo que muestra el error
             mostrarError("ERROR");
@@ -201,13 +202,14 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
             System.exit(ERROR);
         }
     }
-    //metodo que imprime el error recivido
+    
+    //Metodo que imprime el error recibido
     public void mostrarError(String mensaje) {
-        //imprimir el error recivido 
+        //imprimir el error recibido 
         JOptionPane.showMessageDialog(this, mensaje, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
-    //inicia evento de los botones 
+    //Inicia evento de los botones:
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -411,68 +413,80 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
- //metodo al precionar el boton  agarrar de la pinza
-    private void agarrarE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agarrarE_ActionPerformed
-        //manda llamar al metodo que envia el dato en el parametro
-        enviarDatos(agarrare);
-    }//GEN-LAST:event_agarrarE_ActionPerformed
-//metodo al precionar el boton  abajo de el codo
-    private void downC_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downC_ActionPerformed
-       //manda llamar al metodo que envia el dato en el parametro
-       enviarDatos(downc);
-    }//GEN-LAST:event_downC_ActionPerformed
-//metodo al precionar el boton  derecha de la base
+    //Metodo al presionar el boton "derecha" de la base
     private void derA_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derA_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(derechaa);
     }//GEN-LAST:event_derA_ActionPerformed
-//metodo al precionar el boton  detener 
+    
+    //Metodo al presionar el boton "detener"
     private void stopA_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopA_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(stopa);
     }//GEN-LAST:event_stopA_ActionPerformed
-//metodo al precionar el boton  de izquierda de la base
+    
+    //Metodo al presionar el boton de "izquierda" de la base
     private void izqA_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqA_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(izquierdaa);
     }//GEN-LAST:event_izqA_ActionPerformed
-//metodo al precionar el boton  de arriba de el hombro
+    
+    //Metodo al presionar el boton de "arriba" del hombro
     private void upB_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upB_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(upb);
     }//GEN-LAST:event_upB_ActionPerformed
-//metodo al precionar el boton  de abajo de el hombro
+    
+    //Metodo al presionar el boton de "abajo" del hombro
     private void downB_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downB_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(downb);
     }//GEN-LAST:event_downB_ActionPerformed
-//metodo al precionar el boton  de arriba de codo
+    
+    //Metodo al presionar el boton de "arriba" del codo
     private void upC_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upC_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(upc);
     }//GEN-LAST:event_upC_ActionPerformed
-//metodo al precionar el boton  de arriba de la mu√±eca
+    
+    //Metodo al presionar el boton "abajo" del codo
+    private void downC_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downC_ActionPerformed
+       //manda llamar al metodo que envia el dato en el parametro
+       enviarDatos(downc);
+    }//GEN-LAST:event_downC_ActionPerformed
+    
+    //Metodo al presionar el boton de "arriba" de la mu√±eca
     private void upD_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upD_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(upd);
     }//GEN-LAST:event_upD_ActionPerformed
-//metodo al precionar el boton  de abajo de la mu√±eca
+    
+    //Metodo al presionar el boton de "abajo" de la mu√±eca
     private void downD_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downD_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(downd);
     }//GEN-LAST:event_downD_ActionPerformed
-//metodo al precionar el boton  soltar
+    
+    //Metodo al presionar el boton "agarrar" de la pinza
+    private void agarrarE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agarrarE_ActionPerformed
+        //manda llamar al metodo que envia el dato en el parametro
+        enviarDatos(agarrare);
+    }//GEN-LAST:event_agarrarE_ActionPerformed
+    
+    //Metodo al presionar el boton "soltar" de la pinza
     private void soltarE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soltarE_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(soltare);
     }//GEN-LAST:event_soltarE_ActionPerformed
-//metodo al precionar el boton  guardar
+    
+    //Metodo al presionar el boton "guardar"
     private void Change_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Change_ActionPerformed
        //manda llamar al metodo que envia el dato en el parametro
        enviarDatos(change);
     }//GEN-LAST:event_Change_ActionPerformed
-    //termina evento de los botones 
+    //Termina evento de los botones 
 
+    //MÈtodo main
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -513,11 +527,6 @@ public class EP_JAVA_Frame extends javax.swing.JFrame implements SerialPortEvent
     private javax.swing.JButton downC_;
     private javax.swing.JButton downD_;
     private javax.swing.JButton izqA_;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JButton soltarE_;
     private javax.swing.JButton stopA_;
     private javax.swing.JButton upB_;
