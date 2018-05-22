@@ -19,8 +19,6 @@ Valentina Rojas Vazquez
 Control de un brazo robótico con 5 grados de libertad con arduino y una interfaz gráfica en java.
 
 
-
-
 ***
 ## Material
 
@@ -48,9 +46,18 @@ Control de un brazo robótico con 5 grados de libertad con arduino y una interfaz
 
 
 ## Archivos 
++ Fotografías: Carpeta donde se encuentra la evidencia en fotos del circuito en físico funcionando
++ BrazoRobot.ino: Contiene el código de Arduino
++ EP_JAVA_Frame.java: Contiene la interfaz gráfica de java, la cual requiere de la librería RXTXcomm.jar
++ README.md: Contiene la información general en representación de índice
++ RXTXcomm.jar: Librería que debe ser agregada al paquete de java como importación .jar
++ brazoRobotico.fzz: Contiene el diagrama del circuito (realizado en el programa fritzing)
 
 ***
 ## Nota
+Los softwares requeridos para implementar tanto códigos como diagramas fueron: Netbeans (para codificar java), Arduino IDE (programación del arduino), fritzing (para simulación del circuito).
+
+Al momento de presionar el botón de paro en el circuito, el brazo robótico dejará de recibir instrucciones hasta que se vuelva a subir el programa de arduino.
 
 ***
 ## Contactos
