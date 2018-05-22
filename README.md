@@ -57,6 +57,8 @@ Control de un brazo robótico con 5 grados de libertad con arduino y una interfaz
 ## Nota
 Los softwares requeridos para implementar tanto códigos como diagramas fueron: Netbeans (para codificar java), Arduino IDE (programación del arduino), fritzing (para simulación del circuito).
 
+El brazo utilizado para este proyecto funciona con 5 motores DC, los cuales fueron programados individualmente.
+
 Al momento de presionar el botón de paro en el circuito, el brazo robótico dejará de recibir instrucciones hasta que se vuelva a subir el programa de arduino.
 
 ***
